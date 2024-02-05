@@ -1,4 +1,4 @@
-import { StatusBar, Text, TouchableOpacity, View } from "react-native";
+import { Image, StatusBar, Text, TouchableOpacity, View } from "react-native";
 
 export default function HomeScreen({ navigation }) {
 
@@ -7,10 +7,11 @@ export default function HomeScreen({ navigation }) {
     }
 
     return (
-        <View className="flex-1 bg-white p-5 ju justify-center items-center">
+        <View className="flex-1 bg-white justify-center items-center">
             <StatusBar style="auto" />
 
-            <Text className="text-4xl text-bold">QuizPop</Text>
+            {/* <Image source={require('../../assets/icon.png')} className="w-1/3 resize" /> */}
+            <Text className="text-4xl text-bold mt-5">QuizPop</Text>
             <Text className="font-light text-lg text-center">Élargissez vos connaissances avec QuizPop !</Text>
 
             <TouchableOpacity

@@ -49,10 +49,6 @@ export default function QuizScreen({ navigation }) {
     return (
         <View className="flex-1 bg-[#c2c0c0] p-5">
             <StatusBar style="auto" />
-
-            {/* <Text className="text-2xl">QuizPop</Text>
-      <Text className="font-light">Élargissez vos connaissances avec QuizPop !</Text> */}
-
             <View className="flex">
                 <View className="bg-white w-20 h-20 rounded-full m-auto top-2">
                     <ProgressCircle

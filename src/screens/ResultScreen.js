@@ -8,11 +8,13 @@ export default function ResultScreen({ route, navigation }) {
     }
 
     return (
-        <View className="flex bg-[#c2c0c0] p-5">
+        <View className="flex-1 bg-white">
             <StatusBar style="auto" />
-            <View className="flex h-1/3 bg-zinc-200 my-auto mx-10 p-5 rounded-lg items-center justify-center">
-                <Text className="text-[#004643] text-8xl">{score}</Text>
-                <Text className="text-xl">{`/ ${total}`}</Text>
+            <View className="flex bg-[#f0f5f3] h-1/2 my-auto mx-10 p-5 rounded-3xl items-center justify-center shadow-2xl">
+                {
+                    ((total / 2) > score) ? <Text className="text-red-600 text-9xl">{score}</Text> : <Text className="text-green-400 text-9xl">{score}</Text>
+                }
+                <Text className="text-3xl">{`/ ${total}`}</Text>
             </View>
             <TouchableOpacity
                 onPress={handleBackToHome}

@@ -1,4 +1,4 @@
-[
+export const QUESTIONS = [
     {
         "question": "Quel acteur a interprété James Bond dans le film \"Skyfall\" ?",
         "responses": [

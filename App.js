@@ -54,11 +54,19 @@ export default function App() {
       {/* <Text className="text-2xl">QuizPop</Text>
       <Text className="font-light">Élargissez vos connaissances avec QuizPop !</Text> */}
 
-      <View className="bg-white p-5 rounded-2xl">
-        <Text className="font-semibold text-xl">
-          {questions[actualQuestion].question}
-        </Text>
+      <View className="relative">
+        <View className="bg-white w-20 h-20 rounded-full m-auto top-5">
+          <Text className="font-bold text-2xl m-auto">
+            {timeLeft}
+          </Text>
+        </View>
+        <View className="bg-white p-5 rounded-2xl">
+          <Text className="font-semibold text-xl">
+            {questions[actualQuestion].question}
+          </Text>
+        </View>
       </View>
+
       <View className="mt-8">
         {
           questions[actualQuestion].responses.map((response, index) => (

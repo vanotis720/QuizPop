@@ -7,6 +7,12 @@ import DATA from './src/constants/questions.json';
 export default function App() {
   const [questions, setQuestions] = useState(DATA);
   const [actualQuestion, setActualQuestion] = useState(0);
+  const [selectedResponse, setSelectedResponse] = useState(null);
+  const [score, setScore] = useState(0);
+
+  const handleSelected = (index) => {
+    setSelectedResponse(index);
+  }
 
   return (
     <View className="flex-1 bg-[#c2c0c0] p-5">
@@ -23,12 +29,18 @@ export default function App() {
       <View className="mt-8">
         {
           questions[actualQuestion].responses.map((response, index) => (
-            <TouchableOpacity key={index} className="flex flex-row justify-between bg-white p-3 my-2 rounded-2xl">
+            <TouchableOpacity
+              onPress={() => handleSelected(index)}
+              key={index}
+              className={`flex flex-row justify-between ${selectedResponse !== index ? 'bg-white' : 'bg-[#ABD1C6]'} p-3 my-2 rounded-2xl`}
+            >
               <Text className="text-lg font-bold flex-wrap">
                 {response}
               </Text>
-              <MaterialCommunityIcons name="checkbox-blank-circle-outline" size={24} color="black" />
-              {/* <AntDesign name="checkcircle" size={24} color="black" /> */}
+              {
+                selectedResponse !== index ? (<MaterialCommunityIcons name="checkbox-blank-circle-outline" size={24} color="black" />) :
+                  (<AntDesign name="checkcircle" size={24} color="black" />)
+              }
             </TouchableOpacity>
           ))
         }

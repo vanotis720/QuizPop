@@ -14,6 +14,21 @@ export default function App() {
     setSelectedResponse(index);
   }
 
+  const handleNextQuestion = () => {
+    if (questions.length > actualQuestion + 1) {
+      setActualQuestion((prev) => prev + 1);
+      setSelectedResponse(null);
+      if (selectedResponse == questions[actualQuestion].goodResponse)
+        setScore((prevScore) => prevScore + 1)
+    }
+    else {
+      alert(score);
+      setActualQuestion(0);
+      setSelectedResponse(null);
+      setScore(0);
+    }
+  }
+
   return (
     <View className="flex-1 bg-[#c2c0c0] p-5">
       <StatusBar style="auto" />
@@ -46,9 +61,12 @@ export default function App() {
         }
       </View>
 
-      <TouchableOpacity className="absolute bg-[#004643] bottom-5 left-5 right-5 h-12 rounded-2xl">
+      <TouchableOpacity
+        onPress={handleNextQuestion}
+        className="absolute bg-[#004643] bottom-5 left-5 right-5 h-12 rounded-2xl"
+      >
         <Text className="text-lg text-white m-auto font-semibold">
-          Suivant
+          {questions.length > actualQuestion + 1 ? 'Suivant' : 'Valider'}
         </Text>
       </TouchableOpacity>
     </View>

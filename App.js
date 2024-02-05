@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { Modal, StatusBar, Text, TouchableOpacity, View } from 'react-native';
 import { AntDesign, MaterialCommunityIcons } from '@expo/vector-icons';
 import DATA from './src/constants/questions.json';
+import ProgressCircle from 'react-native-progress-circle'
 
 
 export default function App() {
@@ -54,11 +55,20 @@ export default function App() {
       {/* <Text className="text-2xl">QuizPop</Text>
       <Text className="font-light">Élargissez vos connaissances avec QuizPop !</Text> */}
 
-      <View className="relative">
-        <View className="bg-white w-20 h-20 rounded-full m-auto top-5">
-          <Text className="font-bold text-2xl m-auto">
-            {timeLeft}
-          </Text>
+      <View className="flex">
+        <View className="bg-white w-20 h-20 rounded-full m-auto top-2">
+          <ProgressCircle
+            percent={(60 - timeLeft) / 60 * 100}
+            radius={40}
+            borderWidth={5}
+            color="#004643"
+            shadowColor="#ABD1C6"
+            bgColor="#fff"
+          >
+            <Text className="font-bold text-2xl m-auto">
+              {timeLeft}
+            </Text>
+          </ProgressCircle>
         </View>
         <View className="bg-white p-5 rounded-2xl">
           <Text className="font-semibold text-xl">

@@ -11,7 +11,7 @@ export default function ResultScreen({ route, navigation }) {
     return (
         <View className="flex-1 bg-white">
             <StatusBar style="auto" />
-            <View className="bg-[#f0f5f3] w-auto h-2/3 mx-7 px-3 my-auto rounded-3xl shadow-2xl">
+            <View className="w-auto h-2/3 mx-7 px-3 my-auto rounded-3xl shadow-2xl">
                 <View className="flex-1">
                     <LottieView
                         source={(total / 2) > score ? require('../../../assets/animations/Animation-1703622218143-fail.json') : require('../../../assets/animations/Animation-1703606269139-success.json')}

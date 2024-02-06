@@ -26,7 +26,7 @@ export default function QuizScreen({ navigation }) {
         if (questions.length > actualQuestion + 1) {
             setActualQuestion((prev) => prev + 1);
             setSelectedResponse(null);
-            if (selectedResponse === questions[actualQuestion].goodResponse) {
+            if (selectedResponse === questions[actualQuestion].good_response) {
                 setScore((prevScore) => prevScore + 1);
             }
             setTimeLeft(QUIZ_TIME);

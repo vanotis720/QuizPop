@@ -1,4 +1,5 @@
 import { StatusBar, Text, TouchableOpacity, View } from 'react-native';
+import LottieView from "lottie-react-native";
 
 export default function ResultScreen({ route, navigation }) {
     const { score, total } = route.params;
@@ -10,11 +11,19 @@ export default function ResultScreen({ route, navigation }) {
     return (
         <View className="flex-1 bg-white">
             <StatusBar style="auto" />
-            <View className="flex bg-[#f0f5f3] h-1/2 my-auto mx-10 p-5 rounded-3xl items-center justify-center shadow-2xl">
-                {
-                    ((total / 2) > score) ? <Text className="text-red-600 text-9xl">{score}</Text> : <Text className="text-green-400 text-9xl">{score}</Text>
-                }
-                <Text className="text-3xl">{`/ ${total}`}</Text>
+            <View className="bg-[#f0f5f3] w-auto h-2/3 mx-7 px-3 my-auto rounded-3xl shadow-2xl">
+                <View className="flex-1">
+                    <LottieView
+                        source={(total / 2) > score ? require('../../../assets/animations/Animation-1703622218143-fail.json') : require('../../../assets/animations/Animation-1703606269139-success.json')}
+                        autoPlay
+                        loop
+                        speed={0.5}
+                        style={{ flex: 1 }}
+                    />
+                </View>
+                <View className="items-center justify-center my-2">
+                    <Text className="text-[#004643] text-3xl font-bold"> {` ${score} / ${total}`}</Text>
+                </View>
             </View>
             <TouchableOpacity
                 onPress={handleBackToHome}

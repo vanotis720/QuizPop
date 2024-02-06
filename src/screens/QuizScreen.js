@@ -2,15 +2,19 @@ import { useEffect, useState } from 'react';
 import { StatusBar, Text, TouchableOpacity, View } from 'react-native';
 import { AntDesign, MaterialCommunityIcons } from '@expo/vector-icons';
 import ProgressCircle from 'react-native-progress-circle'
-import { QUESTIONS } from '../constants/questions';
+import { getRandomQuestions } from '../models/database';
+
+const QUIZ_TIME = 30;
+const TOTAL_QUESTIONS = 5;
 
 export default function QuizScreen({ navigation }) {
-    const [questions, setQuestions] = useState(QUESTIONS);
-    const [actualQuestion, setActualQuestion] = useState(0);
+    const [isLoading, setIsLoading] = useState(true);
+    const [error, setError] = useState(null);
+    const [questions, setQuestions] = useState([]);
+    const [actualQuestion, setActualQuestion] = useState(null);
     const [selectedResponse, setSelectedResponse] = useState(null);
     const [score, setScore] = useState(0);
-    // const [showResult, setShowResult] = useState(false);
-    const [timeLeft, setTimeLeft] = useState(60);
+    const [timeLeft, setTimeLeft] = useState(QUIZ_TIME);
 
     const handleSelected = (index) => {
         setSelectedResponse(index);
@@ -23,7 +27,7 @@ export default function QuizScreen({ navigation }) {
             if (selectedResponse === questions[actualQuestion].goodResponse) {
                 setScore((prevScore) => prevScore + 1);
             }
-            setTimeLeft(60);
+            setTimeLeft(QUIZ_TIME);
         }
         else {
             navigation.navigate('Result', {
@@ -32,6 +36,27 @@ export default function QuizScreen({ navigation }) {
             });
         }
     }
+
+    const getQuestions = async () => {
+        try {
+            const questions = await getRandomQuestions(TOTAL_QUESTIONS);
+            if (questions.length) {
+                setQuestions(questions);
+                setActualQuestion(0);
+            }
+            else {
+                setError("Une erreur s'est produite...");
+            }
+        } catch (error) {
+            console.log(error);
+            setError(error);
+        }
+        setIsLoading(false);
+    }
+
+    useEffect(() => {
+        getQuestions();
+    }, []);
 
     useEffect(() => {
         const timer = setTimeout(() => {
@@ -45,14 +70,23 @@ export default function QuizScreen({ navigation }) {
         return () => clearTimeout(timer);
     }, [timeLeft, actualQuestion]);
 
-
+    if (isLoading) {
+        return (<View className="flex-1 justify-center items-center">
+            <Text>Loading...</Text>
+        </View>);
+    }
+    if (error) {
+        return (<View className="flex-1 justify-center items-center">
+            <Text>{error}</Text>
+        </View>);
+    }
     return (
         <View className="flex-1 bg-[#c2c0c0] p-5">
             <StatusBar style="auto" />
             <View className="flex">
                 <View className="bg-white w-20 h-20 rounded-full m-auto top-2">
                     <ProgressCircle
-                        percent={(60 - timeLeft) / 60 * 100}
+                        percent={(timeLeft + 1) / QUIZ_TIME * 100}
                         radius={40}
                         borderWidth={5}
                         color="#004643"
@@ -66,7 +100,7 @@ export default function QuizScreen({ navigation }) {
                 </View>
                 <View className="bg-white p-5 rounded-2xl">
                     <Text className="font-semibold text-xl">
-                        {questions[actualQuestion].question}
+                        {questions[actualQuestion].question_text}
                     </Text>
                 </View>
             </View>

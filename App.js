@@ -16,7 +16,7 @@ export default function App() {
       //     console.error('Erreur lors du nettoyage de la table "questions": ', error);
       //   });
 
-      insertQuestions();
+      // insertQuestions();
     } catch (error) {
       console.log(error);
     }

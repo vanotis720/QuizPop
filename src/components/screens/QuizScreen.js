@@ -2,14 +2,15 @@ import { useEffect, useState } from 'react';
 import { StatusBar, Text, TouchableOpacity, View } from 'react-native';
 import { AntDesign, MaterialCommunityIcons } from '@expo/vector-icons';
 import ProgressCircle from 'react-native-progress-circle'
-import { getRandomQuestions } from '../models/database';
+import { getRandomQuestions } from '../../models/database';
+import Loader from '../ui/Loader';
 
 const QUIZ_TIME = 30;
 const TOTAL_QUESTIONS = 5;
 
 export default function QuizScreen({ navigation }) {
     const [isLoading, setIsLoading] = useState(true);
-    const [error, setError] = useState(null);
+    const [error, setError] = useState('null');
     const [questions, setQuestions] = useState([]);
     const [actualQuestion, setActualQuestion] = useState(null);
     const [selectedResponse, setSelectedResponse] = useState(null);
@@ -71,9 +72,9 @@ export default function QuizScreen({ navigation }) {
     }, [timeLeft, actualQuestion]);
 
     if (isLoading) {
-        return (<View className="flex-1 justify-center items-center">
-            <Text>Loading...</Text>
-        </View>);
+        return <View className="flex-1 justify-center items-center">
+            <Loader />
+        </View>;
     }
     if (error) {
         return (<View className="flex-1 justify-center items-center">

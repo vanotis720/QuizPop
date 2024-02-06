@@ -4,13 +4,14 @@ import { AntDesign, MaterialCommunityIcons } from '@expo/vector-icons';
 import ProgressCircle from 'react-native-progress-circle'
 import { getRandomQuestions } from '../../models/database';
 import Loader from '../ui/Loader';
+import Error from '../ui/Error';
 
 const QUIZ_TIME = 30;
 const TOTAL_QUESTIONS = 5;
 
 export default function QuizScreen({ navigation }) {
     const [isLoading, setIsLoading] = useState(true);
-    const [error, setError] = useState('null');
+    const [error, setError] = useState(null);
     const [questions, setQuestions] = useState([]);
     const [actualQuestion, setActualQuestion] = useState(null);
     const [selectedResponse, setSelectedResponse] = useState(null);
@@ -78,14 +79,15 @@ export default function QuizScreen({ navigation }) {
     }
     if (error) {
         return (<View className="flex-1 justify-center items-center">
-            <Text>{error}</Text>
+            <Error />
         </View>);
     }
     return (
         <View className="flex-1 bg-[#c2c0c0] p-5">
             <StatusBar style="auto" />
             <View className="flex">
-                <View className="bg-white w-20 h-20 rounded-full m-auto top-2">
+                <Text className="mx-auto my-2 text-lg font-bold">{`${actualQuestion} / ${questions.length} `}</Text>
+                <View className="bg-white w-20 h-20 rounded-full m-auto">
                     <ProgressCircle
                         percent={(timeLeft + 1) / QUIZ_TIME * 100}
                         radius={40}

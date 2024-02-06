@@ -1,9 +1,14 @@
 import React from "react";
-import { Modal, StyleSheet, View } from "react-native";
+import { Modal, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import LottieView from "lottie-react-native";
+import { useNavigation } from "@react-navigation/native";
 
-export default function Loader({ isLoading }) {
+export default function Error({ isLoading }) {
+    const navigation = useNavigation();
 
+    const handleBackToHome = () => {
+        navigation.navigate('Home');
+    }
     return (
         <View style={styles.container}>
             <Modal
@@ -12,12 +17,20 @@ export default function Loader({ isLoading }) {
                 visible={isLoading}
             >
                 <LottieView
-                    source={require('../../../assets/animations/Animation-1703589502206-loader-multi-dots.json')}
+                    source={require('../../../assets/animations/Animation-1707235920779-cry.json')}
                     autoPlay
                     loop
                     speed={0.5}
                     style={{ flex: 1 }}
                 />
+                <TouchableOpacity
+                    onPress={handleBackToHome}
+                    className="absolute bg-[#004643] bottom-5 left-5 right-5 h-12 rounded-2xl"
+                >
+                    <Text className="text-lg text-white m-auto font-bold">
+                        Rentrer a l'accueil
+                    </Text>
+                </TouchableOpacity>
             </Modal>
         </View>
     )

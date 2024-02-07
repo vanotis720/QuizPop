@@ -17,7 +17,7 @@ export default function ResultScreen({ route, navigation }) {
                         source={(total / 2) > score ? require('../../../assets/animations/Animation-1703622218143-fail.json') : require('../../../assets/animations/Animation-1703606269139-success.json')}
                         autoPlay
                         loop
-                        speed={0.5}
+                        speed={1}
                         style={{ flex: 1 }}
                     />
                 </View>

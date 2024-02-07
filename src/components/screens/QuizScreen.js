@@ -86,7 +86,7 @@ export default function QuizScreen({ navigation }) {
         <View className="flex-1 bg-[#c2c0c0] p-5">
             <StatusBar style="auto" />
             <View className="flex">
-                <Text className="mx-auto my-2 text-lg font-bold">{`${actualQuestion} / ${questions.length} `}</Text>
+                <Text className="mx-auto my-2 text-lg font-bold">{`${actualQuestion + 1} / ${questions.length} `}</Text>
                 <View className="bg-white w-20 h-20 rounded-full m-auto">
                     <ProgressCircle
                         percent={(timeLeft + 1) / QUIZ_TIME * 100}

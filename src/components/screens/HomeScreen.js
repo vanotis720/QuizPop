@@ -19,7 +19,7 @@ export default function HomeScreen({ navigation }) {
                     style={{ flex: 1 }}
                 />
             </View>
-            <View className="h-1/3">
+            <View className="h-1/3 flex justify-center">
                 <Text className="font-semibold text-lg text-center">Élargis tes  connaissances en t’amusant !</Text>
 
                 <TouchableOpacity

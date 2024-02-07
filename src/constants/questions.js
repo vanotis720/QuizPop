@@ -328,5 +328,15 @@ export const QUESTIONS = [
             "Queen"
         ],
         "goodResponse": 1
-    }
+    },
+    {
+        "question": "Quel acteur a interprété James Bond dans le film \"Skyfall\" ?",
+        "responses": [
+            "Daniel Craig",
+            "Pierce Brosnan",
+            "Sean Connery",
+            "Roger Moore"
+        ],
+        "goodResponse": 0
+    },
 ];

@@ -1,7 +1,10 @@
 import * as SQLite from 'expo-sqlite';
 import { QUESTIONS } from '../constants/questions';
+import Constants from 'expo-constants';
 
-const db = SQLite.openDatabase('quizPop.db');
+const appVersion = Constants.expoConfig.version;
+
+const db = SQLite.openDatabase(`quizPop-${appVersion}.db`);
 
 const createQuestionsTable = () => {
     return new Promise((resolve, reject) => {

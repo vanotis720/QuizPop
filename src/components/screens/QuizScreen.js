@@ -4,7 +4,6 @@ import { AntDesign, MaterialCommunityIcons } from '@expo/vector-icons';
 import ProgressCircle from 'react-native-progress-circle'
 import { getRandomQuestions } from '../../models/database';
 import Loader from '../ui/Loader';
-import Error from '../ui/Error';
 
 const QUIZ_TIME = 30;
 const TOTAL_QUESTIONS = 5;
@@ -42,18 +41,23 @@ export default function QuizScreen({ navigation }) {
     const getQuestions = async () => {
         try {
             const questions = await getRandomQuestions(TOTAL_QUESTIONS);
-            if (questions.length) {
+            if (questions.length > 0) {
                 setQuestions(questions);
                 setActualQuestion(0);
+                setIsLoading(false);
+
             }
             else {
-                setError("Une erreur s'est produite...");
+                navigation.navigate('ErrorScreen', {
+                    error: "Il semble qu'il n'y ait plus de questions, reviens plus tard..."
+                });
+                return;
             }
         } catch (error) {
             console.log(error);
             setError(error);
+            setIsLoading(false);
         }
-        setIsLoading(false);
     }
 
     useEffect(() => {
@@ -69,6 +73,10 @@ export default function QuizScreen({ navigation }) {
             }
         }, 1000);
 
+        console.log('============== timer ======================');
+        console.log(timer);
+        console.log('====================================');
+
         return () => clearTimeout(timer);
     }, [timeLeft, actualQuestion]);
 
@@ -78,9 +86,9 @@ export default function QuizScreen({ navigation }) {
         </View>;
     }
     if (error) {
-        return (<View className="flex-1 justify-center items-center">
+        return <View className="flex-1 justify-center items-center">
             <Error />
-        </View>);
+        </View>;
     }
     return (
         <View className="flex-1 bg-[#c2c0c0] p-5">

@@ -7,16 +7,15 @@ export default function App() {
 
   React.useEffect(() => {
     try {
+      clearQuestionsTable()
+        .then((message) => {
+          console.log(message);
+        })
+        .catch((error) => {
+          console.error('Erreur lors du nettoyage de la table "questions": ', error);
+        });
 
-      // clearQuestionsTable()
-      //   .then((message) => {
-      //     console.log(message);
-      //   })
-      //   .catch((error) => {
-      //     console.error('Erreur lors du nettoyage de la table "questions": ', error);
-      //   });
-
-      // insertQuestions();
+      insertQuestions();
     } catch (error) {
       console.log(error);
     }
